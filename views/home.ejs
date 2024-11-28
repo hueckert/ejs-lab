@@ -1,13 +1,34 @@
-<!-- views/home.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title><%= RESTAURANT.name %></title>
 </head>
 <body>
-  <h1>We are rendering an EJS page!</h1>
+    <%- include('./partials/nav') %>
+
+
+  <h1>Welcome to <%= RESTAURANT.name %></h1>
+  <p><strong>Address:</strong> <%= RESTAURANT.address %></p>
+  <p><strong>Phone:</strong> <%= RESTAURANT.phone %></p>
+
+  <!-- Conditional rendering for open/closed status -->
+  <% if (RESTAURANT.isOpen) { %>
+    <p style="color: green;">Yes, we are open!</p>
+  <% } else { %>
+    <p style="color: red;">Sorry, we are closed.</p>
+  <% } %>
+
+  <h2>Menu</h2>
+  <ul>
+    <% RESTAURANT.menu.forEach(item => { %>
+      <li>
+        <strong><%= item.name %></strong> - $<%= item.price.toFixed(2) %> <br>
+        <em><%= item.details %></em> <br>
+        <small>Category: <%= item.category %>, Rating: <%= item.rating %> stars</small>
+      </li>
+    <% }) %>
+  </ul>
 </body>
 </html>
