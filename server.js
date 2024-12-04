@@ -63,6 +63,23 @@ app.get('/', (req, res) => {
     res.locals.RESTAURANT = RESTAURANT;
     res.render('menu.ejs'); // Render the menu view
   });
+
+  // Route for Menu by Category
+app.get('/menu/:category', (req, res) => {
+    const category = req.params.category.toLowerCase();
+    
+    // Filter menu items by category
+    const menuItems = RESTAURANT.menu.filter(item => item.category.toLowerCase() === category);
+  
+    // Capitalize the first letter of the category for better UI
+    const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+  
+    // Send data to the view
+    res.locals.menuItems = menuItems;
+    res.locals.category = formattedCategory;
+    res.locals.RESTAURANT = RESTAURANT;
+    res.render('category.ejs');
+  });
   
   const PORT = 3000;
 app.listen(PORT, () => {

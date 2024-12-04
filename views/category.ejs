@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= RESTAURANT.name %> - <%= category %> Menu</title>
+</head>
+<body>
+  <!-- Include the navigation partial -->
+  <%- include('./partials/nav') %>
+
+  <h1><%= category %> Menu</h1>
+
+  <% if (menuItems.length > 0) { %>
+    <ul>
+      <% menuItems.forEach(item => { %>
+        <li>
+          <strong><%= item.name %></strong> - $<%= item.price.toFixed(2) %> <br>
+          <em><%= item.details %></em> <br>
+          <small>Rating: <%= item.rating %> stars</small>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No items found in the <%= category %> category.</p>
+  <% } %>
+</body>
+</html>
